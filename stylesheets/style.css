@@ -1,0 +1,533 @@
+/* Общие размеры для всех экранов, в пикселях макета */
+:root {
+  --side: 72; /* отступ от края экрана */
+  --title-size: 330; /* кегль заголовков */
+  --text-size: 29.25; /* кегль наборного текста (как имена в подвале) */
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Tektur', sans-serif;
+  background-color: #050505;
+  color: #fff;
+}
+
+/* ---------- Hero ---------- */
+
+.hero {
+  container-type: inline-size;
+  overflow: hidden;
+  background-color: #050505;
+}
+
+/* Первый экран масштабируется по ширине окна целиком, как в макете
+   1440×940: заголовок и планеты в одной пропорции, --u — пиксель макета */
+.hero__stage {
+  --u: calc(100cqw / 1440);
+  --uw: var(--u);
+  position: relative;
+  width: 100%;
+  height: calc(940 * var(--u));
+}
+
+/* Композиция планет (с ней работает физика) */
+.hero__space {
+  position: absolute;
+  inset: 0;
+}
+
+.hero__title {
+  position: absolute;
+  top: calc(12.5 * var(--uw));
+}
+
+/* Заголовки выровнены по центру экрана */
+.hero__title,
+.choose__title {
+  left: 0;
+  right: 0;
+  margin: 0;
+  text-align: center;
+  font-size: calc(var(--title-size) * var(--uw));
+  font-weight: 800;
+  font-variation-settings: 'wdth' 100;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  color: #fff;
+}
+
+/* Заголовок лежит поверх шаров и инвертирует их цвета там,
+   где они пересекаются: на чёрном фоне буквы остаются белыми */
+.hero__title,
+.choose__title {
+  z-index: 2;
+  mix-blend-mode: difference;
+}
+
+.hero__orbit {
+  position: absolute;
+  top: calc(386.1 * var(--u));
+  left: calc(559.71 * var(--u));
+  width: calc(428 * var(--u));
+  height: auto;
+}
+
+/* ---------- Planets ---------- */
+
+.planet {
+  position: absolute;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.planet img {
+  position: absolute;
+  display: block;
+  max-width: none;
+}
+
+.planet--zebra {
+  top: calc(336.5 * var(--u));
+  left: calc(50.5 * var(--u));
+  width: calc(340 * var(--u));
+  height: calc(340 * var(--u));
+  background-color: #a3f3fa;
+}
+
+.planet--zebra img {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.planet--cream,
+.planet--green,
+.planet--orange {
+  background-color: #fff;
+}
+
+.planet--cream {
+  top: calc(360 * var(--u));
+  left: calc(430 * var(--u));
+  width: calc(200 * var(--u));
+  height: calc(200 * var(--u));
+}
+
+.planet--cream img {
+  top: -19.53%;
+  left: -27.47%;
+  width: 139.3%;
+}
+
+.planet--green {
+  top: calc(305 * var(--u));
+  left: calc(1040 * var(--u));
+  width: calc(290 * var(--u));
+  height: calc(290 * var(--u));
+}
+
+.planet--green img {
+  top: -17.01%;
+  left: -17.84%;
+  width: 134.3%;
+}
+
+.planet--orange {
+  top: calc(564 * var(--u));
+  left: calc(600.5 * var(--u));
+  width: calc(296 * var(--u));
+  height: calc(296 * var(--u));
+}
+
+.planet--orange img {
+  top: -22.24%;
+  left: -31.3%;
+  width: 152.7%;
+}
+
+.planet--stripes {
+  top: calc(680 * var(--u));
+  left: calc(964 * var(--u));
+  width: calc(132 * var(--u));
+  height: calc(132 * var(--u));
+  background-image: repeating-linear-gradient(
+    90deg,
+    #3d4bff 0 7.5%,
+    #b9bccb 7.5% 13.75%
+  );
+}
+
+.planet--target {
+  top: calc(653 * var(--u));
+  left: calc(1213 * var(--u));
+  width: calc(154 * var(--u));
+  height: calc(154 * var(--u));
+  background-image: repeating-radial-gradient(
+    circle,
+    #ff5a1f 0 calc(13.2 * var(--u)),
+    #ffe100 calc(13.2 * var(--u)) calc(26.4 * var(--u))
+  );
+}
+
+.planet--dot {
+  top: calc(590 * var(--u));
+  left: calc(1040 * var(--u));
+  width: calc(52 * var(--u));
+  height: calc(52 * var(--u));
+  background-image: radial-gradient(
+    circle,
+    #ff4fd8 calc(11.77 * var(--u)),
+    #ffe100 calc(12.13 * var(--u))
+  );
+}
+
+/* ---------- Stars ---------- */
+
+.star {
+  position: absolute;
+  width: calc(224 * var(--u));
+  height: calc(224 * var(--u));
+}
+
+.star img {
+  position: absolute;
+  inset: 7.52% 9.34%;
+  display: block;
+  width: 81.32%;
+  height: 84.96%;
+}
+
+.star--pink {
+  top: calc(311 * var(--u));
+  left: calc(774 * var(--u));
+  transform: rotate(15deg);
+}
+
+.star--lime {
+  top: calc(646 * var(--u));
+  left: calc(280 * var(--u));
+  transform: rotate(30deg);
+}
+
+/* ---------- Letters ---------- */
+
+/* При наведении буква заливается узором одной из планет
+   и немного увеличивается */
+.letter {
+  display: inline-block;
+  color: #fff;
+  background-color: #fff;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  -webkit-background-clip: text;
+  background-clip: text;
+  transition:
+    color 0.35s ease,
+    transform 0.35s ease;
+}
+
+.letter:hover {
+  /* Временно отключено: смена цвета на узор и увеличение буквы
+  color: transparent;
+  transform: scale(1.08) rotate(var(--tilt, 0deg));
+  */
+  transform: rotate(var(--tilt, 0deg));
+}
+
+/* Каждая буква наклоняется в свою сторону */
+.letter:nth-child(1) {
+  --tilt: -6deg;
+}
+.letter:nth-child(2) {
+  --tilt: 5deg;
+}
+.letter:nth-child(3) {
+  --tilt: -4deg;
+}
+.letter:nth-child(4) {
+  --tilt: 6deg;
+}
+.letter:nth-child(5) {
+  --tilt: -5deg;
+}
+.letter:nth-child(6) {
+  --tilt: 4deg;
+}
+.letter:nth-child(7) {
+  --tilt: -6deg;
+}
+
+.letter--cream {
+  background-image: url('../images/planet-cream.png');
+}
+
+.letter--target {
+  background-image: repeating-radial-gradient(
+    circle,
+    #ff5a1f 0 calc(30 * var(--u)),
+    #ffe100 calc(30 * var(--u)) calc(60 * var(--u))
+  );
+}
+
+.letter--green {
+  background-image: url('../images/planet-green.png');
+}
+
+.letter--dots {
+  background-color: #ff4fd8;
+  background-image: radial-gradient(
+    circle,
+    #ffe100 calc(14 * var(--u)),
+    transparent calc(15 * var(--u))
+  );
+  background-repeat: repeat;
+  background-size: calc(48 * var(--u)) calc(48 * var(--u));
+}
+
+.letter--zebra {
+  background-color: #a3f3fa;
+  background-image: url('../images/planet-zebra.svg');
+}
+
+.letter--stripes {
+  background-image: repeating-linear-gradient(
+    90deg,
+    #3d4bff 0 calc(18 * var(--u)),
+    #b9bccb calc(18 * var(--u)) calc(33 * var(--u))
+  );
+}
+
+/* ---------- Physics ---------- */
+
+/* Смещение от толчков задаётся через margin, чтобы не мешать
+   transform/translate/rotate, которые заняты позой и анимациями */
+.planet,
+.star {
+  margin-top: calc(var(--py, 0) * var(--u));
+  margin-left: calc(var(--px, 0) * var(--u));
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.planet img,
+.star img {
+  pointer-events: none;
+}
+
+/* ---------- Choose (второй экран) ---------- */
+
+/* Второй экран масштабируется по ширине окна: макет 1440×900 */
+.choose {
+  container-type: inline-size;
+  background-color: #050505;
+}
+
+.choose__stage {
+  --u: calc(100cqw / 1440);
+  --uw: var(--u);
+  position: relative;
+  width: 100%;
+  height: calc(900 * var(--u));
+  overflow: hidden;
+}
+
+.choose__title {
+  position: absolute;
+  top: calc(40 * var(--u));
+}
+
+.choose__text {
+  position: absolute;
+  top: calc(396.4 * var(--u));
+  margin: 0;
+  font-family: 'Russo One', sans-serif; /* как имена в подвале */
+  font-size: calc(var(--text-size) * var(--u));
+  font-weight: 400;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.choose__text--left {
+  left: calc(var(--side) * var(--u));
+}
+
+.choose__text--right {
+  right: calc(var(--side) * var(--u));
+  text-align: right;
+}
+
+.choose__circles {
+  position: absolute;
+  top: calc(488.4 * var(--u));
+  /* Лента из 15 кругов: слева запас в один период (780px), который
+     въезжает в кадр при движении, справа — запас на широкие окна */
+  left: calc(-840 * var(--u));
+  display: flex;
+}
+
+.circle {
+  flex: none;
+  width: calc(320 * var(--u));
+  height: calc(320 * var(--u));
+  border-radius: 50%;
+}
+
+/* При наведении круг немного увеличивается,
+   оставаясь в своём слое — правый сосед по-прежнему поверх */
+.circle {
+  position: relative; /* все круги в одном слое — порядок по разметке */
+  transition: transform 0.3s ease;
+  cursor: pointer; /* клик включает музыку цвета (scripts/colorMusic.js) */
+}
+
+.circle:hover {
+  transform: scale(1.08);
+}
+
+.circle + .circle {
+  margin-left: calc(-60 * var(--u));
+}
+
+.circle--pink {
+  background: url('../images/planet-orange.png') 59.4% 42.2% / 152.7% no-repeat;
+}
+
+.circle--cream {
+  background: url('../images/planet-cream.png') center / cover;
+}
+
+.circle--lime {
+  background: url('../images/pattern-lime.png') center / cover;
+}
+
+/* ---------- Footer ---------- */
+
+/* Подвал из Claude Design (макет 1280px), пересчитан в пиксели
+   макета 1440 и масштабируется по ширине окна, как второй экран */
+.footer {
+  container-type: inline-size;
+  background-color: #050505;
+}
+
+.footer__inner {
+  --u: calc(100cqw / 1440);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* номер и подписи прижаты к низу подвала */
+  height: calc(600 * var(--u));
+  padding: calc(54 * var(--u)) calc(var(--side) * var(--u)) calc(45 * var(--u));
+  color: #f7f7f5;
+}
+
+/* Номер группы выровнен по центру, как заголовки. Он чуть шире
+   поля между отступами, поэтому блок расширен на 0.1em в обе стороны —
+   иначе центрирование не сработает и номер прижмётся к левому краю */
+.footer__group {
+  position: relative;
+}
+
+.footer__number {
+  margin: 0 -0.1em;
+  text-align: center;
+  font-size: calc(304 * var(--u));
+  font-weight: 900;
+  font-variation-settings: 'wdth' 100;
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+}
+
+/* Буквы номера сохраняют цвет подвала */
+.footer__number .letter {
+  color: inherit;
+  background-color: currentColor;
+}
+
+/* Шары поверх номера: при наведении пружинисто увеличиваются и поворачиваются */
+.footer__ball {
+  position: absolute;
+  border-radius: 50%;
+  transition: transform 0.4s cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+
+.footer__ball--dots {
+  top: -14%;
+  left: 8%;
+  width: calc(135 * var(--u));
+  height: calc(135 * var(--u));
+  background: #f9cfc9 radial-gradient(circle, #ff6000 36%, transparent 39%) 0
+    0 / calc(22.5 * var(--u)) calc(22.5 * var(--u));
+}
+
+.footer__ball--stripes {
+  bottom: -11%;
+  left: 55%;
+  width: calc(101 * var(--u));
+  height: calc(101 * var(--u));
+  background: repeating-linear-gradient(
+    90deg,
+    #3f4bff 0 calc(10.1 * var(--u)),
+    #b9b9c9 calc(10.1 * var(--u)) calc(18 * var(--u))
+  );
+}
+
+.footer__ball--lime {
+  top: -26%;
+  right: 6%;
+  width: calc(169 * var(--u));
+  height: calc(169 * var(--u));
+  background: #c2f500 radial-gradient(circle, #ff5a1f 32%, transparent 35%) 0
+    0 / calc(20.25 * var(--u)) calc(20.25 * var(--u));
+}
+
+.footer__ball--dots:hover,
+.footer__ball--lime:hover {
+  transform: scale(1.1) rotate(20deg);
+}
+
+.footer__ball--stripes:hover {
+  transform: scale(1.1) rotate(-20deg);
+}
+
+.footer__people {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: calc(27 * var(--u));
+  margin-top: calc(50 * var(--u));
+}
+
+.footer__item {
+  display: flex;
+  flex-direction: column;
+  gap: calc(9 * var(--u));
+}
+
+.footer__item--right {
+  align-items: flex-end;
+}
+
+.footer__label {
+  margin: 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: calc(13.5 * var(--u));
+  letter-spacing: 0.12em;
+  color: #9a9a9a;
+}
+
+.footer__value {
+  margin: 0;
+  font-family: 'Russo One', sans-serif;
+  font-size: calc(var(--text-size) * var(--u));
+  white-space: nowrap;
+}

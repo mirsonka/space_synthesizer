@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tektur</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&family=Russo+One&display=swap">
+  <link rel="stylesheet" href="stylesheets/fonts.css">
+  <link rel="stylesheet" href="stylesheets/style.css">
+  <link rel="stylesheet" href="stylesheets/animation.css">
+</head>
+<body>
+  <section class="hero">
+    <div class="hero__stage">
+      <h1 class="hero__title" aria-label="КОСМОС">
+        <span class="letter letter--cream" aria-hidden="true">К</span><span class="letter letter--target" aria-hidden="true">О</span><span class="letter letter--green" aria-hidden="true">С</span><span class="letter letter--dots" aria-hidden="true">М</span><span class="letter letter--zebra" aria-hidden="true">О</span><span class="letter letter--stripes" aria-hidden="true">С</span>
+      </h1>
+
+      <!-- Композиция планет 1440×940 по центру сцены -->
+      <div class="hero__space">
+        <img class="hero__orbit" src="images/orbit.svg" width="428" height="428" alt="">
+
+        <div class="planet planet--zebra">
+          <img src="images/planet-zebra.svg" width="309" height="309" alt="">
+        </div>
+        <div class="planet planet--cream">
+          <img src="images/planet-cream.png" alt="">
+        </div>
+        <div class="planet planet--green">
+          <img src="images/planet-green.png" alt="">
+        </div>
+        <div class="planet planet--orange">
+          <img src="images/planet-orange.png" alt="">
+        </div>
+        <div class="planet planet--stripes"></div>
+        <div class="planet planet--target"></div>
+        <div class="planet planet--dot"></div>
+
+        <div class="star star--pink">
+          <img src="images/star-pink.png" width="182" height="190" alt="">
+        </div>
+        <div class="star star--lime">
+          <img src="images/star-lime.png" width="182" height="190" alt="">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="choose">
+    <div class="choose__stage">
+      <h2 class="choose__title" aria-label="ВЫБЕРИ">
+        <span class="letter" aria-hidden="true">В</span><span class="letter" aria-hidden="true">Ы</span><span class="letter" aria-hidden="true">Б</span><span class="letter" aria-hidden="true">Е</span><span class="letter" aria-hidden="true">Р</span><span class="letter" aria-hidden="true">И</span>
+      </h2>
+      <p class="choose__text choose__text--left">Выбери свой<br>бит</p>
+      <p class="choose__text choose__text--right">и наслаждайся<br>музыкой!</p>
+
+      <div class="choose__circles">
+        <div class="circle circle--pink"></div>
+        <div class="circle circle--cream"></div>
+        <div class="circle circle--lime"></div>
+        <div class="circle circle--pink"></div>
+        <div class="circle circle--cream"></div>
+        <div class="circle circle--lime"></div>
+        <div class="circle circle--pink"></div>
+        <div class="circle circle--cream"></div>
+        <div class="circle circle--lime"></div>
+        <div class="circle circle--pink"></div>
+        <div class="circle circle--cream"></div>
+        <div class="circle circle--lime"></div>
+        <div class="circle circle--pink"></div>
+        <div class="circle circle--cream"></div>
+        <div class="circle circle--lime"></div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__group">
+        <p class="footer__number" aria-label="Б25Д309"><span class="letter" aria-hidden="true">Б</span><span class="letter" aria-hidden="true">2</span><span class="letter" aria-hidden="true">5</span><span class="letter" aria-hidden="true">Д</span><span class="letter" aria-hidden="true">3</span><span class="letter" aria-hidden="true">0</span><span class="letter" aria-hidden="true">9</span></p>
+        <div class="footer__ball footer__ball--dots"></div>
+        <div class="footer__ball footer__ball--stripes"></div>
+        <div class="footer__ball footer__ball--lime"></div>
+      </div>
+
+      <div class="footer__people">
+        <div class="footer__item">
+          <p class="footer__label">СТУДЕНТ:</p>
+          <p class="footer__value">Мешавкина Алина</p>
+        </div>
+        <div class="footer__item footer__item--right">
+          <p class="footer__label">КУРАТОР:</p>
+          <p class="footer__value">Харитонов Захар</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="scripts/musicEngine.js"></script>
+  <script src="scripts/planets-physics.js"></script>
+  <script src="scripts/colorMusic.js"></script>
+  <script src="scripts/waveMotion.js"></script>
+  <script src="scripts/reveal.js"></script>
+</body>
+</html>

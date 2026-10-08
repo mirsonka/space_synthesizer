@@ -1,0 +1,149 @@
+/* Плавное «парение» планет и звёзд.
+   Используются отдельные свойства translate/rotate,
+   чтобы не перетирать transform: rotate(...) у звёзд. */
+
+@keyframes float {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  25% {
+    translate: calc(var(--dx) * var(--u)) calc(var(--dy) * -1 * var(--u));
+  }
+  50% {
+    translate: calc(var(--dx) * -0.5 * var(--u)) calc(var(--dy) * var(--u));
+  }
+  75% {
+    translate: calc(var(--dx) * -1 * var(--u)) calc(var(--dy) * -0.4 * var(--u));
+  }
+}
+
+@keyframes sway {
+  0%,
+  100% {
+    rotate: 0deg;
+  }
+  50% {
+    rotate: var(--angle);
+  }
+}
+
+@keyframes orbit-spin {
+  to {
+    rotate: 360deg;
+  }
+}
+
+@keyframes spin-left {
+  to {
+    rotate: -360deg;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .planet {
+    animation: float var(--duration, 9s) ease-in-out var(--delay, 0s) infinite;
+  }
+
+  .planet--zebra   { --dx: 6;  --dy: 8;  --duration: 11s; --delay: -2s; }
+  .planet--cream   { --dx: 5;  --dy: 6;  --duration: 8s;  --delay: -5s; }
+  .planet--green   { --dx: 7;  --dy: 9;  --duration: 12s; --delay: -1s; }
+  .planet--orange  { --dx: 6;  --dy: 7;  --duration: 10s; --delay: -6s; }
+  .planet--stripes { --dx: 4;  --dy: 6;  --duration: 7s;  --delay: -3s; }
+  .planet--target  { --dx: 5;  --dy: 5;  --duration: 9s;  --delay: -4s; }
+  .planet--dot     { --dx: 3;  --dy: 5;  --duration: 6s;  --delay: -2s; }
+
+  /* Полосатая планета вращается, как звёзды */
+  .planet--stripes {
+    animation:
+      float var(--duration) ease-in-out var(--delay) infinite,
+      orbit-spin 40s linear infinite;
+  }
+
+  /* Звёзды парят и слегка покачиваются */
+  .star {
+    animation:
+      float var(--duration) ease-in-out var(--delay) infinite,
+      sway var(--sway-duration) ease-in-out var(--delay) infinite;
+  }
+
+  .star--pink { --dx: 5; --dy: 7; --duration: 9s;  --delay: -3s; --angle: 12deg;  --sway-duration: 14s; }
+  /* Звёзды медленно вращаются вместо покачивания */
+  .star--pink,
+  .star--lime {
+    animation:
+      float var(--duration) ease-in-out var(--delay) infinite,
+      orbit-spin 40s linear infinite;
+  }
+
+  .star--lime { --dx: 6; --dy: 6; --duration: 10s; --delay: -7s; --angle: -14deg; --sway-duration: 16s; }
+
+  /* Пунктир орбиты заметно вращается */
+  .hero__orbit {
+    animation: orbit-spin 20s linear infinite;
+  }
+}
+
+/* Лента кругов на втором экране бесконечно едет вправо.
+   Узор повторяется каждые три круга: 3 × (320 − 60) = 780px макета,
+   поэтому сдвиг на 780px незаметно зацикливается */
+@keyframes circles-run {
+  to {
+    transform: translateX(calc(780 * var(--u)));
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .choose__circles {
+    animation: circles-run 10s linear infinite;
+  }
+}
+
+/* Шары над номером в подвале плавно парят.
+   Анимация идёт через translate, поэтому не мешает
+   увеличению с поворотом при наведении (transform) */
+@media (prefers-reduced-motion: no-preference) {
+  .footer__ball {
+    animation: float var(--duration) ease-in-out var(--delay) infinite;
+  }
+
+  .footer__ball--dots    { --dx: 5; --dy: 6; --duration: 9s;  --delay: -2s; }
+  .footer__ball--stripes { --dx: 4; --dy: 5; --duration: 7s;  --delay: -5s; }
+
+  /* Розовый шар над «Б» вращается влево (против часовой),
+     полосатый над «Д» и салатовый над «9» — вправо (по часовой) */
+  .footer__ball--dots {
+    animation:
+      float var(--duration) ease-in-out var(--delay) infinite,
+      spin-left 40s linear infinite;
+  }
+
+  .footer__ball--stripes,
+  .footer__ball--lime {
+    animation:
+      float var(--duration) ease-in-out var(--delay) infinite,
+      orbit-spin 40s linear infinite;
+  }
+  .footer__ball--lime    { --dx: 6; --dy: 7; --duration: 11s; --delay: -8s; }
+}
+
+/* Появление заголовков 2 и 3 экрана при прокрутке.
+   Класс .reveal ставит scripts/reveal.js, .is-visible — когда заголовок
+   попал в окно. Буквы двигаются через translate, поэтому наклон
+   при наведении (transform) продолжает работать */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal .letter {
+    opacity: 0;
+    translate: 0 40%;
+    transition:
+      color 0.35s ease,
+      transform 0.35s ease,
+      opacity 0.8s ease calc(var(--i, 0) * 80ms),
+      translate 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) calc(var(--i, 0) * 80ms);
+  }
+
+  .reveal.is-visible .letter {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
